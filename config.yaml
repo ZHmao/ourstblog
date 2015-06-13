@@ -1,0 +1,9 @@
+name: yogahouse
+version: 1
+handle:
+
+- directoryindex: yoga
+
+libraries:
+- name: "django"
+version: "1.6"
