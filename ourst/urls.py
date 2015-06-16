@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     (r'^$', views.homepage),
     (r'^about/$', views.about),
     (r'^contact/$', views.contact),
-    (r'^post/$', views.post),
+    (r'^post/(.{1, 8})/$', views.post),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', 
 	{'document_root': settings.STATICFILES_DIRS,}),
 )
