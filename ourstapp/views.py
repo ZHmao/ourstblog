@@ -6,12 +6,12 @@ from django.http import HttpResponse
 # Create your views here.
 
 title_dict = {
-	'useMD': u'Markdown 初次使用经历',
-	'oracleOP': u'常用的Oracle数据库操作'
+	'useMD': 'Be Confidence',
+	'oracleOP': 'Be Confidence'
 	}
 preview_dict = {
-	'useMD': u'我相信，一百个完美的计划也比不上一次失败的尝试。',
-	'oracleOP': u'数据库是信息爆炸时代发展的坚实基础。'
+	'useMD': '',
+	'oracleOP': ''
 	}
 
 def homepage1(req):
