@@ -28,7 +28,7 @@ def about(req):
 
 def post(req, file_name):
 	my_context_dict = {
-		'article_title': title_dict['file_name'],
-		'article_preview': preview_dict['file_name']
+		'article_title': title_dict[file_name],
+		'article_preview': preview_dict[file_name]
 		}
-	return render_to_response('post.html', mycontext_dict)
+	return render_to_response('post.html', my_context_dict)
