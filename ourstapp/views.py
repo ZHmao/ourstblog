@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from ourst import settings
 import mistune
 import os
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -46,3 +47,11 @@ def blog(req, file_name):
 		'article_content': content
 		}
 	return render_to_response('article.html', my_context_dict)
+
+# send email
+def send_to_me(req):
+	subject = 'test'
+	main_msg = 'this is ourst test'
+	from_email = '841923148@qq.com'
+	send_mail(subject, main_msg, from_email, ['ourstmao@gmail.com'])
+	return HttpResponse('Thanks! I will read it .')

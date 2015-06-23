@@ -92,3 +92,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'static/').replace('\\','/'),
 )
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'youmail@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'yourpassword'
