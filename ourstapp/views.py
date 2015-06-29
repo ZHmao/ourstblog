@@ -50,8 +50,17 @@ def blog(req, file_name):
 
 # send email
 def send_to_me(req):
+	form_content = {'subject': 'A contact'}
+	if req.method == 'GET':
+		pass
+	elif req.method == 'POST':
+		form_content['name'] = req.META.get('name', 'None')
+		form_content['email'] = req.META.get('email', 'None')
+		form_content['phone'] = req.META.get('phone', 'None')
+		form_content['msg'] = req.META.get('message', 'None')
+
 	subject = 'test'
 	main_msg = 'this is ourst test'
 	from_email = '841923148@qq.com'
-	send_mail(subject, main_msg, from_email, ['ourstmao@gmail.com'])
+	send_mail(form_content['subject'], form_content['name']+': '+form_content['msg']+', phone: '+form_content['phone'], form_content['email'], ['ourstmao@gmail.com'])
 	return HttpResponse('Thanks! I will read it .')
