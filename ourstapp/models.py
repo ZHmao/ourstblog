@@ -3,6 +3,14 @@
 from django.db import models
 
 
+class Author(models.Model):
+	name = models.CharField(max_length=20)
+	password = models.CharField(max_length=50)
+	email = models.EmailField()
+
+	def __unicode__(self):
+		return '{}'.format(self.name)
+
 class Article(models.Model):
 	"""
 	title:----------------БъЬт
@@ -23,6 +31,5 @@ class Article(models.Model):
 	author = models.ForeignKey(Author)
 	state = models.IntegerField()
 
-class Author(models.Model):
-	name = models.CharField(max_length=20)
-	email = models.EmailField()
+	def __unicode__(self):
+		return '{}'.format(self.title)

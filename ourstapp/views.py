@@ -6,8 +6,8 @@ from ourst import settings
 import mistune
 import os
 from django.core.mail import send_mail
+from ourstapp.models import Article
 
-# Create your views here.
 
 title_dict = {
 	'useMD': 'Be Confidence',
@@ -22,7 +22,9 @@ def homepage1(req):
     return HttpResponse('what')
 
 def homepage(req):
-    return render_to_response('index.html')
+	article_list = Article.objects.all()
+	context_dict = {'article_list': article_list}
+	return render_to_response('index.html', context_dict)
 
 def contact(req):
 	return render_to_response('contact.html')

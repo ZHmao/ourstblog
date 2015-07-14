@@ -23,30 +23,20 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			<div class="post-preview">
-				<a href="/article/useMD/">
-					<h2 class="post-title">
-						Markdown 初次使用经历
-					</h2>
-					<h3 class="post-subtitle">
-						我相信，一百个完美的计划也比不上一次失败的尝试。
-					</h3>
-				</a>
-				<p class="post-meta">Posted by <a href="#">Ourst</a> on June 16, 2015</p>
-			</div>
-			<hr>
-			<div class="post-preview">
-				<a href="/article/oracleOP/">
-					<h2 class="post-title">
-						常用的Oracle数据库操作
-					</h2>
-					<h3 class="post-subtitle">
-						数据库是信息爆炸时代发展的坚实基础。
-					</h3>
-				</a>
-				<p class="post-meta">Posted by <a href="#">Ourst</a> on June 16, 2015</p>
-			</div>
-			<hr>
+			{% for article in article_list %}
+				<div class="post-preview">
+					<a href="{{ article.id }}">
+						<h2 class="post-title">
+							{{ article.title }}
+						</h2>
+						<h3 class="post-subtitle">
+							{{ article.abstract }}
+						</h3>
+					</a>
+				</div>
+				<hr>
+			{% endfor %}
+		
 			<!-- Pager -->
 			<ul class="pager">
 				<li class="next">
