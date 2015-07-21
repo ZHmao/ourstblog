@@ -5,8 +5,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from ourst import settings
 import mistune
 import os
+import datetime
 from django.core.mail import send_mail
-from ourstapp.models import Article
+from ourstapp.models import Article, Author
+from ourstapp.forms import UploadForm
 
 
 title_dict = {
@@ -49,6 +51,20 @@ def blog(req, file_name):
 		'article_content': content
 		}
 	return render_to_response('article.html', my_context_dict)
+
+def upload_article(req):
+	new_form = UploadForm(req.POST, req.FILES)
+	author = Author.objects.all()[0]
+	if new_form.is_valid():
+		with open(new_form.md_file, 'r') as fr:
+			content = fr.read()
+			content = content.decode('utf-8')
+			content = mistune.markdown(content)
+		new_article = Article(title=new_form.title, abstract=new_form.abstract, content=content , post_date=datetime.date.today(), author=author, state=1)
+		new_article.save()
+
+	return render_to_response('upload.html', {'form': UploadForm()})
+
 
 # send email
 def send_to_me(req):

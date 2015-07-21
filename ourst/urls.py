@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^article/(.{1,8})/$', views.blog),
 	(r'^undev/$', views.undev),
 	(r'^login/$', 'django.contrib.auth.views.login'),
+	(r'^upload/$', views.upload_article),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', 
 	{'document_root': settings.STATICFILES_DIRS,}),
 )
