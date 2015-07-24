@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload your blog</title>
+</head>
+
+<body>
+	{% if user.is_authenticated %}
+		<p>Please ensure your file encoded by utf-8.</p>
+		<form enctype="multipart/form-data" method="post" action="">
+			{% csrf_token %}
+			{{ form }}
+			<input type="hidden" name="next" value="/" />
+			<input type="submit" value="commit" />
+		</form>
+	{% endif %}
+
+</body>
+
+</html>
