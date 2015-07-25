@@ -7,9 +7,12 @@
 <body>
 	{% if user.is_authenticated %}
 		<p>Please ensure your file encoded by utf-8.</p>
+		<p>{{ user.username }}</p>
 		<form enctype="multipart/form-data" method="post" action="">
 			{% csrf_token %}
-			{{ form }}
+			<table>
+				{{ form.as_table }}	
+			</table>
 			<input type="hidden" name="next" value="/" />
 			<input type="submit" value="commit" />
 		</form>
