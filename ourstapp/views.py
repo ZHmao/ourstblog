@@ -9,6 +9,7 @@ import datetime
 from django.core.mail import send_mail
 from ourstapp.models import Article, Author
 from ourstapp.forms import UploadForm
+from django.core.context_processors import csrf
 
 
 title_dict = {
@@ -56,14 +57,16 @@ def upload_article(req):
 	new_form = UploadForm(req.POST, req.FILES)
 	author = Author.objects.all()[0]
 	if req.method == 'POST' and new_form.is_valid():
-		with open(new_form.md_file, 'r') as fr:
-			content = fr.read()
-			content = content.decode('utf-8')
-			content = mistune.markdown(content)
-		new_article = Article(title=new_form.title, abstract=new_form.abstract, content=content , post_date=datetime.date.today(), author=author, state=1)
+		raw_file = req.FILES['md_file']
+		content = raw_file.read()
+		content = content.decode('utf-8')
+		content = mistune.markdown(content)
+		new_article = Article(title=new_form.cleaned_data['title'], abstract=new_form.cleaned_data['abstract'], content=content , post_date=datetime.date.today(), author=author, state=1)
 		new_article.save()
-
-	return render_to_response('upload.html', {'form': UploadForm(), 'user': req.user})
+	
+	my_context = {'form': UploadForm(), 'user': req.user}
+	my_context.update(csrf(req))
+	return render_to_response('upload.html', my_context)
 
 
 # send email
